@@ -17,7 +17,7 @@ print("12: bmp to tif")
 x = (int)(input("\nEnter your choice : "))
 image_format = ["jpg", "png", "tif", "bmp"]
 
-temp = int((x-1)/3)
+temp = int((x - 1) / 3)
 y = (x - 1) % 3
 
 if y >= temp:
@@ -34,7 +34,11 @@ output_image_format = image_format[(int(y))]
 images = glob.glob("Input Images/*.{}".format(input_image_format))
 
 if len(images) == 0:
-    print("\n\nThere is no {} images in 'Input Images' Folder/Directory.\n\n".format(input_image_format))
+    print(
+        "\n\nThere is no {} images in 'Input Images' Folder/Directory.\n\n".format(
+            input_image_format
+        )
+    )
 
 else:
     for image in images:
@@ -44,6 +48,9 @@ else:
 
         cv2.imwrite("Output Images/{}".format(new_image), img)
 
-    print("\n\nAll the images with {} is succesfully converted to {}.".format(
-        input_image_format, output_image_format))
+    print(
+        "\n\nAll the images with {} is succesfully converted to {}.".format(
+            input_image_format, output_image_format
+        )
+    )
     print("\n\nThank you for using this tool.\n\n")

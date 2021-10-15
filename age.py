@@ -13,4 +13,6 @@ age_year = current_year - birth_year
 age_month = abs(current_month - birth_month)
 age_day = abs(current_day - birth_day)
 
-print("Your exact age is: ", age_year, "Years", age_month, "months and", age_day, "days")
+print(
+    "Your exact age is: ", age_year, "Years", age_month, "months and", age_day, "days"
+)

@@ -3,7 +3,6 @@ import random
 import math
 
 
-
 # Random
 #   valueND = random.randint(0,3)
 #     if valueND==1:
@@ -21,23 +20,22 @@ import math
 #         enemyX_change.append(0.3)
 #         enemyY_change.append(40)
 
-    
+
 # Initilization
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 
 # Background of the game
-bg = pygame.image.load('a.jpg')
-
+bg = pygame.image.load("a.jpg")
 
 
 # Title and icon of the game
 pygame.display.set_caption("Space Invader")
-icon = pygame.image.load('3.png')
+icon = pygame.image.load("3.png")
 pygame.display.set_icon(icon)
 
 # Player
-playerImg = pygame.image.load('1.png')
+playerImg = pygame.image.load("1.png")
 playerX = 370
 playerY = 480
 playerX_change = 0
@@ -50,16 +48,16 @@ enemyX_change = []
 enemyY_change = []
 num_of_enemies = 6
 for i in range(num_of_enemies):
-    valueND = random.randint(0,3)
-    if valueND==1:
-        eIMG = pygame.image.load('2.png')
+    valueND = random.randint(0, 3)
+    if valueND == 1:
+        eIMG = pygame.image.load("2.png")
         enemyImg.append(eIMG)
         enemyX.append(random.randint(0, 800))
         enemyY.append(random.randint(50, 150))
         enemyX_change.append(0.3)
         enemyY_change.append(40)
     else:
-        eIMG = pygame.image.load('5.png')
+        eIMG = pygame.image.load("5.png")
         enemyImg.append(eIMG)
         enemyX.append(random.randint(0, 800))
         enemyY.append(random.randint(50, 150))
@@ -67,7 +65,7 @@ for i in range(num_of_enemies):
         enemyY_change.append(40)
 
 # Bullet
-bulletImg = pygame.image.load('4.png')
+bulletImg = pygame.image.load("4.png")
 bulletX = 0
 bulletY = 480
 bullet_state = "ready"
@@ -76,16 +74,16 @@ bulletY_change = 0.7
 
 # Score
 score = 0
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font("freesansbold.ttf", 32)
 
 textX = 10
 textY = 10
 
 # Game over
-over_font = pygame.font.Font('freesansbold.ttf', 64)
+over_font = pygame.font.Font("freesansbold.ttf", 64)
 
 # Winner
-win_font = pygame.font.Font('freesansbold.ttf', 64)
+win_font = pygame.font.Font("freesansbold.ttf", 64)
 
 
 def show_score(x, y):
@@ -111,16 +109,14 @@ def enemy(x, y, i):
     screen.blit(enemyImg[i], (x, y))
 
 
-
-#Bullet Shot
+# Bullet Shot
 def fire_bullet(x, y):
     global bullet_state
     bullet_state = "fire"
     screen.blit(bulletImg, (x + 16, y + 10))
 
 
-
-#Collision Check
+# Collision Check
 def isColliscon(enemyX, enemyY, bulletX, bulletY):
     distance = math.sqrt(math.pow(enemyX - bulletX, 2) + math.pow(enemyY - bulletY, 2))
     if distance < 27:
@@ -129,16 +125,11 @@ def isColliscon(enemyX, enemyY, bulletX, bulletY):
         return False
 
 
-
-
-
 # Main Program
 running = True
 while running:
-    #screen.fill((255, 255, 255))
-    screen.blit(bg,(0, 0))
-
-
+    # screen.fill((255, 255, 255))
+    screen.blit(bg, (0, 0))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -155,7 +146,7 @@ while running:
                     fire_bullet(playerX, bulletY)
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.type == pygame.K_RIGHT:
-                 print("Keystroke has been released")
+                print("Keystroke has been released")
 
     playerX += playerX_change
     if playerX <= 0:
@@ -171,9 +162,6 @@ while running:
             game_over_text()
             break
 
-
-
-
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 0:
             enemyX_change[i] = 0.3
@@ -181,8 +169,6 @@ while running:
         elif enemyX[i] >= 740:
             enemyY[i] += enemyY_change[i]
             enemyX_change[i] = -0.3
-
-
 
         if score == 100:
             winner()
@@ -198,8 +184,6 @@ while running:
 
         enemy(enemyX[i], enemyY[i], i)
 
-
-
     if bulletY <= 0:
         bulletY = 480
         bullet_state = "ready"
@@ -208,9 +192,6 @@ while running:
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
 
-
-
     player(playerX, playerY)
     show_score(textX, textY)
     pygame.display.update()
-

@@ -44,6 +44,6 @@ if __name__ == "__main__":
     print("now")
     hit("up")
     while True:
-        image = ImageGrab.grab().convert('L')
+        image = ImageGrab.grab().convert("L")
         data = image.load()
         collide(data)
